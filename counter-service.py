@@ -8,7 +8,7 @@ COUNTER_FILE = "/data/counter.txt"
 
 def read_counter():
     """
-    Reads and returns the current counter value from the file.
+    Reads and returns the current counter value from the file.(For test Push!)
     If the file doesn't exist, returns 0.
 
     Returns:
