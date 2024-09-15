@@ -76,7 +76,7 @@ jobs:
         run: 
           REPO_NAME="${GITHUB_REPOSITORY##*/}"
           echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
-          # echo "::set-output name=repo_name::$REPO_NAME"
+          echo "::set-output name=repo_name::$REPO_NAME"
 
       - name: Build Docker image 
         env: 
