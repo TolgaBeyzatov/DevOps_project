@@ -50,10 +50,9 @@ jobs:
         # Creating release with the tag from the previous step 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_DEV }}
+        uses: actions/create-release@v1    
         with: 
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_DEV }}
           tag_name: ${{ steps.next_version.outputs.tag }}
           release_name: Release ${{ steps.next_version.outputs.tag }}
           draft: false
