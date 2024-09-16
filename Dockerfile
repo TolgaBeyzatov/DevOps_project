@@ -24,8 +24,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 USER appuser
 
-RUN -u "${UID}" -v /var/run/docker.sock:/var/run/docker.sock
-
 COPY counter-service.py .
 
 EXPOSE 8080
