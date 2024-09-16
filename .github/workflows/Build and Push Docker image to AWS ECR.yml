@@ -96,7 +96,7 @@ jobs:
           ECR_REPOSITORY: ${{ env.REPO_NAME }}
           IMAGE_TAG: ${{ steps.next_version.outputs.tag }}
         run: |
-          docker build -v /var/run/docker.sock:/var/run/docker.sock --group-add docker -u ubuntu -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           echo "IMAGE_NAME=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_ENV
         # Docker image Snyk scan | If fails, drop the action 
       - name: Run Snyk to check for vulnerabilities
