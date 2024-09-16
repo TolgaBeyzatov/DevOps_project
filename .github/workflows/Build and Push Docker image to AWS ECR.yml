@@ -25,9 +25,9 @@ jobs:
         with:
           fetch-depth: 0 #Necessary to fetch all tags and history
           
-      # SonarCloud analysis step to scan the code and Dockerfile for vulnerabilities.
+      # SonarCloud analysis step to scan the code for vulnerabilities.
       - name: SonarCloud
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
