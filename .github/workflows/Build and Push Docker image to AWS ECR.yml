@@ -122,10 +122,10 @@ jobs:
           # Tag the image as latest
           docker tag $ECR_REGISTRY/$GIT_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           # Push the specific version tag
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          # docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           # Push the latest tag
-          # docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-      - name: Push Docker image to Amazon ECR
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+      - name: Push Docker image to Amazon EC2
         env:
           EC2_PEM_KEY: ${{ secrets.EC2_PEM_KEY }}
           EC2_HOST: ${{ secrets.EC2_HOST }}
