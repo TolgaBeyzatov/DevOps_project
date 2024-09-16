@@ -148,8 +148,6 @@ jobs:
           # Copy docker-compose.yml to EC2 server 
           $SCP_COMMAND docker-compose.yml $EC2_USER@$EC2_HOST:/home/ubuntu/docker/
 
-          chmod 666 /var/run/docker.sock
-
           # Pull and run the Docker container on EC2
           $SSH_COMMAND "cd /home/ubuntu/docker/ && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:latest && docker compose -f docker-compose.yml up -d --force-recreate"
 
