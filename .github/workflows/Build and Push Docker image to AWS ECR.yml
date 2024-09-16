@@ -112,7 +112,7 @@ jobs:
           ## Tag Docker image as "latest" and push to ECR ## 
           ## Deploy to EC2 using SSH ##
 
-      - name: Deploy Docker image to Amazon ECR
+      - name: Push Docker image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           GIT_REPOSITORY: ${{ env.REPO_NAME }}
@@ -125,7 +125,7 @@ jobs:
           # docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           # Push the latest tag
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-      - name: Push Docker image to Amazon EC2
+      - name: Deploy Amazon EC2
         env:
           EC2_PEM_KEY: ${{ secrets.EC2_PEM_KEY }}
           EC2_HOST: ${{ secrets.EC2_HOST }}
@@ -149,7 +149,7 @@ jobs:
           $SCP_COMMAND docker-compose.yml $EC2_USER@$EC2_HOST:/home/ubuntu/docker/
 
           # Pull and run the Docker container on EC2
-          $SCP_COMMAND "cd /home/ubuntu/docker/ && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG && docker compose -f docker-compose.yml up -d --force-recreate"
+          $SCP_COMMAND "cd /home/ubuntu/docker/ && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:latest && docker compose -f docker-compose.yml up -d --force-recreate"
 
           # Cleanup PEM key 
           rm -f ec2.pem
