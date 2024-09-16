@@ -20,10 +20,11 @@ RUN adduser \
 
 RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python -m pip install -r requirements.txt\
-    --mount=type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock
+    python -m pip install -r requirements.txt
 
 USER appuser
+
+RUN chmod 666 /var/run/docker.sock
 
 COPY counter-service.py .
 
