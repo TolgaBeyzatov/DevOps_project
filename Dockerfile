@@ -18,7 +18,7 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 
-ENTRYPOINT [ "-u root -v /var/run/docker.sock:/var/run/docker.sock" ] 
+ARG "-u root -v /var/run/docker.sock:/var/run/docker.sock"  
 
 RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
