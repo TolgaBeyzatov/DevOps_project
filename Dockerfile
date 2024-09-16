@@ -8,7 +8,7 @@ ENV PYTHONBUFFERED=1
 
 WORKDIR /app
 
-ARG UID=10001
+ARG UID=10000
 RUN adduser \
     --disabled-password \
     --gecos "" \
