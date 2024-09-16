@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
 
-RUN usermod -a -G docker appuser
+RUN chmod 666 /var/run/docker.sock
 
 USER appuser
 
