@@ -24,10 +24,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 USER appuser
 
-COPY permissions.sh .
-
 COPY counter-service.py .
 
 EXPOSE 8080
 
-CMD ["permissions.sh","gunicorn", "counter-service:app", "--bind", "0.0.0.0:8080", "--access-logfile", "-", "--error-logfile", "-"]
+CMD ["gunicorn", "counter-service:app", "--bind", "0.0.0.0:8080", "--access-logfile", "-", "--error-logfile", "-"]
