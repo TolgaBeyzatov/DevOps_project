@@ -5,7 +5,6 @@ services:
     image: <aws account id>.dkr.ecr.eu-north-1.amazonaws.com/my_project_ecr:latest
     volumes:
       - ./data:/data
-      - /var/run/docker.sock:/var/run/docker.sock
     ports:
     - "80:8080"
     restart: always
