@@ -8,7 +8,7 @@ ENV PYTHONBUFFERED=1
 
 WORKDIR /app
 
-ARG UID=10000
+ARG UID=1001
 RUN adduser \
     --disabled-password \
     --gecos "" \
@@ -21,6 +21,12 @@ RUN adduser \
 RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
+
+RUN touch /var/run/docker.sock
+
+RUN chown root:docker /var/run/docker.sock
+
+RUN usermod -a -G docker appuser
 
 USER appuser
 
