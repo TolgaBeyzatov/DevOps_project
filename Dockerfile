@@ -24,8 +24,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 RUN touch /var/run/docker.sock
 
-RUN chown root:docker /var/run/docker.sock
-
 RUN usermod -a -G docker appuser
 
 USER appuser
