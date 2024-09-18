@@ -25,6 +25,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 USER appuser
 
+RUN mkdir -p ./data/counter.txt
+
 COPY counter-service.py .
 
 EXPOSE 8080
