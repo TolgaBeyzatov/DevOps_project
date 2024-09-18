@@ -4,7 +4,7 @@ services:
     container_name: counter-service-project-cont  
     image: 127214174680.dkr.ecr.eu-north-1.amazonaws.com/my_project_ecr:latest
     volumes:
-      - ./data:/data
+      - ./data:/data:rw
     ports:
     - "80:8080"
     restart: always
