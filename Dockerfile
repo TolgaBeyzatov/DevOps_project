@@ -22,10 +22,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
 
-USER 0
-
-RUN mkdir -p ./data/counter.txt
-
 USER appuser
 
 COPY counter-service.py .
