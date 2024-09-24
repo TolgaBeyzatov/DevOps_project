@@ -125,6 +125,12 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           # Push the latest tag
           # docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+      - name: Extract image tag as env
+        run: |
+          IMAGE_TAG="${IMAGE_TAG}"
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+          echo "::set-output name=image_tag::$IMAGE_TAG"
+          
       - name: Deploy Amazon EC2
         env:
           EC2_PEM_KEY: ${{ secrets.EC2_PEM_KEY }}
