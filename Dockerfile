@@ -1,4 +1,4 @@
-ARG PYTHON_VERSION=3.13.0a4
+ARG PYTHON_VERSION=3.13
 
 FROM python:${PYTHON_VERSION}-alpine3.19 as base
 
@@ -34,7 +34,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 USER appuser
 
 # Copy the source code(counter-service.py) into the container.
-COPY counter-service.py .
+COPY postcount-service.py .
 
 # Expose the port that the application listens on.
 # In most Unix-like operating systems, binding to ports below 1024 requires elevated privileges.
