@@ -1,7 +1,9 @@
 version: '2.4' # The last version of Docker compose file format that directly supports mem_limit and cpus
 services: 
   postcount-service:
-    container_name: postcount-project-container  
+    container_name: postcount-project-container
+    environment:
+      - IMAGE_TAG=${IMAGE_TAG}
     image: 127214174680.dkr.ecr.eu-north-1.amazonaws.com/my_project_ecr:${IMAGE_TAG}
     volumes:
       - ./data:/data:rw
