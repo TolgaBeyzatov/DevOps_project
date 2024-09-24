@@ -127,9 +127,8 @@ jobs:
           # Push the latest tag
           # docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
           
-      - name: Docker Compose Action        
-      - uses: actions/checkout@v4  
-      - uses: hoverkraft-tech/compose-action@v2.0.1    
+      - name: Docker Compose Action          
+        uses: hoverkraft-tech/compose-action@v2.0.1    
         with: 
           compose-file: "./docker-compose.yml"   
         env: 
