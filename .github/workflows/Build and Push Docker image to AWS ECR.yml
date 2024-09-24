@@ -120,11 +120,11 @@ jobs:
           IMAGE_TAG: ${{ steps.next_version.outputs.tag }}
         run: |
           # Tag the image as latest
-          docker tag $ECR_REGISTRY/$GIT_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          # docker tag $ECR_REGISTRY/$GIT_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
           # Push the specific version tag
-          # docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           # Push the latest tag
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          # docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
       - name: Deploy Amazon EC2
         env:
           EC2_PEM_KEY: ${{ secrets.EC2_PEM_KEY }}
@@ -149,7 +149,7 @@ jobs:
           $SCP_COMMAND docker-compose.yml $EC2_USER@$EC2_HOST:/home/ubuntu/docker/
 
           # Pull and run the Docker container on EC2
-          $SSH_COMMAND "cd /home/ubuntu/docker/ && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:latest && sudo docker compose -f docker-compose.yml up -d --force-recreate"
+          $SSH_COMMAND "cd /home/ubuntu/docker/ && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG && sudo docker compose -f docker-compose.yml up -d --force-recreate"
 
           # Cleanup PEM key 
           rm -f ec2.pem
