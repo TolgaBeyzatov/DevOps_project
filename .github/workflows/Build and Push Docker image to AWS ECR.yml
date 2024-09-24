@@ -135,8 +135,6 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: my_project_ecr
           IMAGE_TAG: ${{ steps.next_version.outputs.tag }}
-          script: | 
-            export IMAGE_TAG="${IMAGE_TAG}"
         run: | 
           # Save PEM key to file and set permissions
           echo "$EC2_PEM_KEY" > ec2.pem
