@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-# Define the path for counter file to store the data in Docker Volume 
+# Define the path for counter file to store the data in Docker Volume. 
 COUNTER_FILE = "/data/postcount.txt"
 
 def read_postcount():
