@@ -2,9 +2,7 @@ version: '2.4' # The last version of Docker compose file format that directly su
 services: 
   postcount-service:
     container_name: postcount-project-container
-    environment:
-      - IMAGE_TAG=${IMAGE_TAG}
-    image: 127214174680.dkr.ecr.eu-north-1.amazonaws.com/my_project_ecr:${IMAGE_TAG}
+    image: 127214174680.dkr.ecr.eu-north-1.amazonaws.com/my_project_ecr:latest
     volumes:
       - ./data:/data:rw
     ports:
