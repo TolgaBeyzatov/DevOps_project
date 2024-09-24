@@ -131,8 +131,9 @@ jobs:
         uses: hoverkraft-tech/compose-action@v2.0.1    
         with: 
           compose-file: "./docker-compose.yml"   
-        env: 
-          CUSTOM_VARIABLE: "IMAGE_TAG"
+          services: |
+            container_name: postcount-project-container  
+            image: 127214174680.dkr.ecr.eu-north-1.amazonaws.com/my_project_ecr:${IMAGE_TAG}
           
       - name: Deploy Amazon EC2
         env:
