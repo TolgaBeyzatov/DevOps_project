@@ -42,4 +42,4 @@ COPY postcount-service.py .
 EXPOSE 8080
 
 # Run the application.Logs enabled to see the output logs
-CMD ["gunicorn", "counter-service:app", "--bind", "0.0.0.0:8080", "--access-logfile", "-", "--error-logfile", "-"]
+CMD ["gunicorn", "postcount-service:app", "--bind", "0.0.0.0:8080", "--access-logfile", "-", "--error-logfile", "-"]
