@@ -126,14 +126,7 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           # Push the latest tag
           # docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-          
-      - name: Docker Compose Action          
-        uses: hoverkraft-tech/compose-action@v2.0.1    
-        with: 
-          compose-file: "./docker-compose.yml"   
-        env:
-          CUSTOM_VARIABLE: "${IMAGE_TAG}"
-         
+                   
       - name: Deploy Amazon EC2
         env:
           EC2_PEM_KEY: ${{ secrets.EC2_PEM_KEY }}
@@ -142,6 +135,8 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: my_project_ecr
           IMAGE_TAG: ${{ steps.next_version.outputs.tag }}
+          script: | 
+            export IMAGE_TAG="${IMAGE_TAG}"
         run: | 
           # Save PEM key to file and set permissions
           echo "$EC2_PEM_KEY" > ec2.pem
