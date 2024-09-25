@@ -151,7 +151,14 @@ jobs:
           $SCP_COMMAND docker-compose.yml $EC2_USER@$EC2_HOST:/home/ubuntu/docker/
 
           # Pull and run the Docker container on EC2
-          $SSH_COMMAND "cd /home/ubuntu/docker/ && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:latest && sudo docker run --name postcount-project-container -d -p 80:8080 $ECR_REGISTRY/$ECR_REPOSITORY:latest && \\
+          $SSH_COMMAND "cd /home/ubuntu/docker/ && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:latest \\
+          'if sudo docker ps -q --filter "status=running" | grep -q .; then \\
+          sudo docker stop $(sudo docker ps -q --filter "status=running"); \\
+          fi && \\
+          if sudo docker ps -a -q | grep -q .; then \\
+            sudo docker rm $(sudo docker ps -a -q); \\
+          fi \\
+          && sudo docker run --name postcount-project-container -d -p 80:8080 $ECR_REGISTRY/$ECR_REPOSITORY:latest && \\
           sudo docker compose -f docker-compose.yml up -d --force-recreate && sudo docker image prune -f"
 
           # Cleanup PEM key 
