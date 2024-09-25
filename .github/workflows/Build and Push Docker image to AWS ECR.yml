@@ -151,6 +151,8 @@ jobs:
           $SCP_COMMAND docker-compose.yml $EC2_USER@$EC2_HOST:/home/ubuntu/docker/
 
           # Pull and run the Docker container on EC2
+          # Check if there are any running containers, if there are stop and remove them.
+          # Run a new container with the pulled image from the ECR.
           $SSH_COMMAND "cd /home/ubuntu/docker/ && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG && \\
           sudo docker ps -aq | xargs docker stop | xargs docker rm && \\
           sudo docker run --name postcount-project-container -d -p 80:8080 -v ./data:/data:rw $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG && \\
