@@ -41,6 +41,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Determine Next Version
         id: next_version
+        if: startsWith(github.head_ref, 'test/') 
         run: |
           # Fetch all tags
           git fetch --tags
@@ -53,13 +54,12 @@ jobs:
             LATEST_TAG="v0.0.0"
           fi
 
-          if: startsWith(github.head_ref, 'test/')
           # Increment the patch version 
           NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{print $1"."$2"."$3+1}')
 
-          if: startsWith(github.head_ref, 'development/')
+          # if startsWith(github.head_ref, 'development/')
           # increment the feature version
-          NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{print $1+1"."$2:1"."$3:1}')
+          # NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{print $1+1"."$2:1"."$3:1}')
          
           # Output the next version 
           echo "::set-output name=tag::$NEXT_TAG"
