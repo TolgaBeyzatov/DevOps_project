@@ -62,7 +62,7 @@ jobs:
           #echo "Next version: $NEXT_TAG"
 
       - name: Determine Next Version
-        id: next_feature_version
+        id: next_patch_version
         if: github.ref_name == 'development' 
         run: |
           # Fetch all tags
