@@ -77,8 +77,7 @@ jobs:
           fi
           
           # increment the feature version
-          NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{$2 = 0}' | awk -F. '{$3 = 0} 1')
-          NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{print $1+1"."$2"."$3}')
+          NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{print $1+1"."$2"."$3 = "0"}')
          
           # Output the next version 
           echo "::set-output name=tag::$NEXT_TAG"
