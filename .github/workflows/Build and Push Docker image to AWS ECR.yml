@@ -41,7 +41,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Determine Next Version
         id: next_patch_version
-        if: startsWith(github.head_ref, 'test/') 
+        if: github.ref_name == 'test' 
         run: |
           # Fetch all tags
           git fetch --tags
@@ -66,7 +66,7 @@ jobs:
 
       - name: Determine Next Version
         id: next_feature_version
-        if: startsWith(github.head_ref, 'development/') 
+        if: github.ref_name == 'development' 
         run: |
           # Fetch all tags
           git fetch --tags
