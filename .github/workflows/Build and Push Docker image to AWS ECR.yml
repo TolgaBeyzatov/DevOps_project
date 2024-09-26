@@ -39,31 +39,31 @@ jobs:
           git config --global user.email 'github-actions@github.com'
 
       # Runs a single command using the runners shell
-      - name: Determine Next Version
-        id: next_patch_version
-        if: github.ref_name == 'test' 
-        run: |
+     # - name: Determine Next Version
+      #  id: next_patch_version
+       # if: github.ref_name == 'test' 
+        #run: |
           # Fetch all tags
-          git fetch --tags
+         # git fetch --tags
 
           # Get the latest tag, assume semver, ans sort.
-          LATEST_TAG=$(git tag -l | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n1)
+          #LATEST_TAG=$(git tag -l | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n1)
 
           # If there is no tag yet, start with v0.0.0 Used for new repos
-          if  [ -z "LATEST_TAG" ]; then 
-            LATEST_TAG="v0.0.0"
-          fi
+          #if  [ -z "LATEST_TAG" ]; then 
+           # LATEST_TAG="v0.0.0"
+          #fi
 
           # Increment the patch version 
-          NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{print $1"."$2"."$3+1}')
+        #  NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{print $1"."$2"."$3+1}')
          
           # Output the next version 
-          echo "::set-output name=tag::$NEXT_TAG"
-          echo "Next version: $NEXT_TAG"
+         # echo "::set-output name=tag::$NEXT_TAG"
+          #echo "Next version: $NEXT_TAG"
 
       - name: Determine Next Version
         id: next_feature_version
-       # if: github.ref_name == 'development' 
+        if: github.ref_name == 'development' 
         run: |
           # Fetch all tags
           git fetch --tags
