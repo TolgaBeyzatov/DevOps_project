@@ -63,7 +63,7 @@ jobs:
 
       - name: Determine Next Version
         id: next_feature_version
-        if: github.ref_name == 'development' 
+       # if: github.ref_name == 'development' 
         run: |
           # Fetch all tags
           git fetch --tags
