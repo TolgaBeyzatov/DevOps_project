@@ -61,8 +61,7 @@ jobs:
           #echo "Next version: $NEXT_TAG"
 
       - name: Determine Next Version
-        id: next_version
-        #if: github.ref_name == 'development' 
+        id: next_version 
         run: |
           # Fetch all tags
           git fetch --tags
@@ -74,14 +73,17 @@ jobs:
           if  [ -z "LATEST_TAG" ]; then 
             LATEST_TAG="v0.0.0"
           fi
-          
+
+          if github.ref_name == 'development'; then
           # increment the feature version
-          NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{print $1"."$2"."$3+1}')
-          # NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{print $1+1"."$2"."($3 = 0)}')
+          # NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{print $1"."$2"."$3+1}')
+          NEXT_TAG=$(echo $LATEST_TAG | awk -F. '{print $1+1"."$2"."($3 = 0)}')
+          fi
          
           # Output the next version 
           echo "::set-output name=tag::$NEXT_TAG"
           echo "Next version: $NEXT_TAG"
+
           
         # Creating release with the tag from the previous step 
       - name: Create Release
